@@ -12,6 +12,7 @@ const Header = (props) => {
                 isSelectOpened={props.isSelectOpened}
                 openCloseSelect={props.openCloseSelect}
                 selectLanguage={props.selectLanguage}
+                selectDegrees={props.selectDegrees}
             />
         </div>
     )

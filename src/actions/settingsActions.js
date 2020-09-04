@@ -12,3 +12,10 @@ export function selectLanguage(language) {
         language
     }
 }
+
+export function selectDegrees(degrees) {
+    return {
+        type: types.SELECT_DEGREES,
+        degrees
+    }
+}

@@ -19,6 +19,11 @@ export default function settingsReducer(state = initialState, action) {
                 ...state,
                 language: action.language
             }
+        case types.SELECT_DEGREES:
+            return {
+                ...state,
+                degrees: action.degrees
+            }
         default: return state;
     }
 }

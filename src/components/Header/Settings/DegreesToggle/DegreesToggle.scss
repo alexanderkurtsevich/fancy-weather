@@ -1,0 +1,35 @@
+@import "../../../../style/constants.scss";
+
+.degrees-toggle {
+    display: flex;
+    overflow: hidden;
+
+    width: 88px;
+    height: 44px;
+
+    border-radius: $border-radius;
+
+    cursor: pointer;
+
+    &__degrees {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 44px;
+
+        background-color: $dark-gray;
+
+        &:hover {
+            background-color: $dark-gray-hover;
+        }
+
+        &_active {
+            background-color: $light-gray;
+
+            &:hover {
+                background-color: $light-gray-hover;
+            }
+        }
+    }
+}
