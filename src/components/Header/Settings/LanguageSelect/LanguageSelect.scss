@@ -1,0 +1,82 @@
+@import "../../../../style/constants.scss";
+
+.language-select {
+    position: relative;
+
+    width: fit-content;
+
+    font-size: 14px;
+
+    cursor: pointer;
+    &__selected-language {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 71px;
+        height: 44px;
+
+        border-radius: $border-radius;
+        background-color: $light-gray;
+
+        transition: $fast-transition;
+
+        &_open {
+            border-radius: $border-radius $border-radius 0 0;
+        }
+
+        &:hover {
+            background-color: $light-gray-hover;
+        }
+    }
+
+    &__language {
+        margin-right: 11px;
+    }
+
+    &__arrow {
+        width: 5px;
+        height: 5px;
+        margin-bottom: 2px;
+
+        border-right: 2px solid $arrow-color;
+        border-bottom: 2px solid $arrow-color;
+
+        transform: rotate(45deg);
+    }
+
+    &__select-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 71px;
+        height: 44px;
+
+        background-color: $dark-gray;
+
+        transition: $fast-transition;
+
+        &:hover {
+            background-color: $dark-gray-hover;
+        }
+    }
+
+    &__drop-menu {
+        position: absolute;
+
+        visibility: hidden;
+        overflow: hidden;
+
+        opacity: 0;
+        border-radius: 0 0 $border-radius $border-radius;
+
+        transition: $fast-transition;
+
+        &_open {
+            visibility: visible;
+
+            opacity: 1;
+        }
+    }
+}

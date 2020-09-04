@@ -1,0 +1,2 @@
+export const OPEN_CLOSE_SELECT = 'OPEN_SELECT';
+export const SELECT_LANGUAGE = 'SELECT_LANGUAGE';
