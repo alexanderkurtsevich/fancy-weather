@@ -1,5 +1,7 @@
 @import './constants.scss';
+@import './fonts.scss';
 
 body {
     color: $font-color;
+    @include font-montserrat(16, 400)
 }

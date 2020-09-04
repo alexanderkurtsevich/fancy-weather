@@ -1,7 +1,11 @@
+@import "../../../style/fonts.scss";
+
 .settings {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     width: 223px;
+
+    @include font-montserrat(14, 700);
 }
