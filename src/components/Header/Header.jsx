@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.scss';
 import Settings from './Settings/Settings';
+import Search from './Search/Search';
 
 const Header = (props) => {
     return (
@@ -13,6 +14,10 @@ const Header = (props) => {
                 openCloseSelect={props.openCloseSelect}
                 selectLanguage={props.selectLanguage}
                 selectDegrees={props.selectDegrees}
+                changeBG={props.changeBG}
+            />
+            <Search
+                className='header__search'
             />
         </div>
     )

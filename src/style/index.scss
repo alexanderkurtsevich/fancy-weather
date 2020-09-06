@@ -3,5 +3,6 @@
 
 body {
     color: $font-color;
-    @include font-montserrat(16, 400)
+    @include font-montserrat(16, 400);
+    background-color: black;
 }

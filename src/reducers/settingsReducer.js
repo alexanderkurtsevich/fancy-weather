@@ -24,6 +24,10 @@ export default function settingsReducer(state = initialState, action) {
                 ...state,
                 degrees: action.degrees
             }
+        case types.CHANGE_BG:
+            return {
+                ...state,
+            }
         default: return state;
     }
 }

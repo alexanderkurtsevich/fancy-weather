@@ -20,6 +20,8 @@
 
         background-color: $dark-gray;
 
+        transition: $fast-transition;
+
         &:hover {
             background-color: $dark-gray-hover;
         }

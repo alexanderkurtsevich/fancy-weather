@@ -19,3 +19,9 @@ export function selectDegrees(degrees) {
         degrees
     }
 }
+
+export function changeBG() {
+    return {
+        type: types.CHANGE_BG,
+    }
+}
