@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Header.scss';
 import Settings from './Settings/Settings';
 import Search from './Search/Search';
 
 const Header = (props) => {
+    const { requestData } = props;
+    useEffect(() => {
+        requestData()
+    }, [requestData])
     return (
         <div className='header'>
             <Settings
