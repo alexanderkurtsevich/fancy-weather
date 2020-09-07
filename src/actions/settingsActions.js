@@ -7,6 +7,7 @@ export function openCloseSelect() {
 }
 
 export function selectLanguage(language) {
+    localStorage.language = language;
     return {
         type: types.SELECT_LANGUAGE,
         language
@@ -14,6 +15,7 @@ export function selectLanguage(language) {
 }
 
 export function selectDegrees(degrees) {
+    localStorage.degrees = degrees;
     return {
         type: types.SELECT_DEGREES,
         degrees
@@ -23,5 +25,11 @@ export function selectDegrees(degrees) {
 export function changeBG() {
     return {
         type: types.CHANGE_BG,
+    }
+}
+
+function changeLanguage() {
+    return {
+        type: types.CHANGE_LANGUAGE
     }
 }

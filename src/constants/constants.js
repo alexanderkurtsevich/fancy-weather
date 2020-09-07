@@ -1,9 +1,9 @@
 export const LANGUAGES = {
-    EN: 'EN',
-    RU: 'RU',
+    EN: 'en',
+    RU: 'ru',
 }
 
 export const DEGREES = {
-    C: '°C',
-    F: '°F',
+    C: 'C',
+    F: 'F',
 }

@@ -2,8 +2,8 @@ import { LANGUAGES, DEGREES } from '../constants/constants';
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-    language: LANGUAGES.EN,
-    degrees: DEGREES.C,
+    language: localStorage.language || LANGUAGES.EN,
+    degrees: localStorage.degrees || DEGREES.C,
     isSelectOpened: false,
 }
 

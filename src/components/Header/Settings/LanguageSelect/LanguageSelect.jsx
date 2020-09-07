@@ -16,7 +16,7 @@ const LanguageSelect = (props) => {
             <div
                 className={selectedLangClassName}
             >
-                <p className='language-select__language'>{props.language}</p>
+                <p className='language-select__language'>{props.language.toUpperCase()}</p>
                 <div className='language-select__arrow'></div>
             </div>
             {isOpen
@@ -28,13 +28,13 @@ const LanguageSelect = (props) => {
                         className='language-select__select-item'
                         onClick={() => props.selectLanguage(LANGUAGES.EN)}
                     >
-                        {LANGUAGES.EN}
+                        {LANGUAGES.EN.toUpperCase()}
                     </div>
                     <div
                         className='language-select__select-item'
                         onClick={() => props.selectLanguage(LANGUAGES.RU)}
                     >
-                        {LANGUAGES.RU}
+                        {LANGUAGES.RU.toUpperCase()}
                     </div>
                 </div>
                 : null}

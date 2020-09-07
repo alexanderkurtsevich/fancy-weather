@@ -3,20 +3,47 @@ import * as types from '../constants/actionTypes';
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
+import { getGeometry, getDegrees, getLanguage } from '../selectors/selectors';
 
 export default function* sagaWatcher() {
-    yield takeEvery(types.REQUEST_DATA, sagaWorker)
+    yield takeEvery(types.REQUEST_DATA, initDataRequest)
+    yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
+    yield takeEvery(types.SELECT_LANGUAGE, changeLanguageRequest)
 }
 
-function* sagaWorker() {
+function* initDataRequest() {
+    const language = yield select(getLanguage);
+    const degrees = yield select(getDegrees);
+
     const usersCoordinates = yield call(getUsersCoordinates);
-    const geocodingInfo = yield call(() => getGeocodingInfo(usersCoordinates));
+    const geocodingInfo = yield call(() => getGeocodingInfo(usersCoordinates, language));
     yield put(setGeocodingInfo(geocodingInfo));
-    const place = yield select((state) => state.location.place);
-    const degrees = yield select((state) => state.settings.degrees);
-    const weatherInfo = yield call(() => getWeatherInfo(place, degrees));
+
+    const geometry = yield select(getGeometry);
+    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees));
     yield put(setWeatherInfo(weatherInfo));
-    yield console.log(geocodingInfo, weatherInfo)
+}
+
+function* changeDegreesRequest() {
+    const geometry = yield select(getGeometry);
+    const language = yield select(getLanguage);
+    const degrees = yield select(getDegrees);
+
+    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
+    yield put(setWeatherInfo(weatherInfo));
+}
+
+function* changeLanguageRequest() {
+    const geometry = yield select(getGeometry);
+    const language = yield select(getLanguage);
+    const degrees = yield select(getDegrees);
+
+    const usersCoordinates = yield call(getUsersCoordinates);
+    const geocodingInfo = yield call(() => getGeocodingInfo(usersCoordinates, language));
+    yield put(setGeocodingInfo(geocodingInfo));
+
+    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
+    yield put(setWeatherInfo(weatherInfo));
 }
 
 async function getUsersCoordinates() {
@@ -25,15 +52,18 @@ async function getUsersCoordinates() {
     return coordinates;
 }
 
-async function getGeocodingInfo(query) {
-    const geocodingURL = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=7b09b9a9fd0842e6ad9e13896d7a8f4c&pretty=1&language=en`;
+async function getGeocodingInfo(query, language) {
+    console.log(language)
+    const geocodingURL = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=7b09b9a9fd0842e6ad9e13896d7a8f4c&pretty=1&language=${language}`;
     const geocodingData = await axios.get(geocodingURL);
     const geocodingInfo = geocodingData.data.results[0]
     return geocodingInfo;
 }
 
-async function getWeatherInfo(place, degrees) {
-    const weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${place}&days=4&units=${degrees}&lang=en&key=b79f52f38c114829838840b5cbe85565`;
+async function getWeatherInfo(geometry, language, degrees) {
+    const lat = geometry.lat;
+    const lon = geometry.lng
+    const weatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&days=4&units=${degrees}&lang=${language}&key=b79f52f38c114829838840b5cbe85565`;
     const weatherData = await axios.get(weatherUrl);
     const geocodingInfo = weatherData.data.data;
     return geocodingInfo;

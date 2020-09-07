@@ -8,7 +8,8 @@ export function requestData() {
 
 export function setGeocodingInfo(geocodingInfo) {
     const geocoding = geocodingInfo.components;
-    const coordinates = geocodingInfo.annotations.DMS
+    const coordinates = geocodingInfo.annotations.DMS;
+    const geometry = geocodingInfo.geometry;
     return {
         type: types.SET_GEOCODING_INFO,
         payload: {
@@ -16,7 +17,8 @@ export function setGeocodingInfo(geocodingInfo) {
             country: geocoding.country,
             place: `${geocoding.city}, ${geocoding.country}`,
             lat: formatCoordinates(coordinates.lat),
-            lng: formatCoordinates(coordinates.lng)
+            lng: formatCoordinates(coordinates.lng),
+            geometry,
         }
     }
 }
