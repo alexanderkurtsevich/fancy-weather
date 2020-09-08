@@ -1,0 +1,45 @@
+@import "../../../style/fonts.scss";
+
+.main-day {
+    display: grid;
+
+    grid-template-columns: min-content 230px;
+    grid-template-rows: 160px 160px;
+    text-transform: uppercase;
+
+    &__temp {
+        white-space: nowrap;
+        margin: 0;
+        grid-row: 1/3;
+        line-height: 373px;
+
+        @include font-montserrat(306, 700);
+
+        &::after {
+            position: relative;
+            top: -145px;
+
+            font-size: 100px;
+
+            content: "°";
+        }
+    }
+    &__info {
+        grid-column: 2/3;
+        grid-row: 2/3;
+
+        @include font-montserrat(22, 700);
+
+        & p {
+            margin: 0;
+
+            line-height: 37px;
+        }
+    }
+
+    &__image {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+}

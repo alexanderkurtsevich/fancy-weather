@@ -3,6 +3,7 @@ import * as types from '../constants/actionTypes';
 export function setWeatherInfo(weatherInfo) {
     const mainDay = weatherInfo[0];
     const otherDays = weatherInfo.slice(1);
+    console.log(otherDays)
     return {
         type: types.SET_WEATHER_INFO,
         payload: {
@@ -13,11 +14,14 @@ export function setWeatherInfo(weatherInfo) {
                 wind: mainDay.wind_spd.toFixed(1),
                 humidity: mainDay.rh,
                 icon: mainDay.weather.icon,
+                time: mainDay.ts
             },
-            other: otherDays.map(day => {
+            other: otherDays.map((day, index) => {
                 return {
                     temp: Math.round(day.temp),
                     icon: day.weather.icon,
+                    id: index,
+                    date: day.datetime
                 }
             })
         }

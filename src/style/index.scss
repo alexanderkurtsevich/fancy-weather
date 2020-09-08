@@ -1,8 +1,15 @@
 @import './constants.scss';
 @import './fonts.scss';
 
+html {
+    height: 100%;
+}
+
 body {
     color: $font-color;
     @include font-montserrat(16, 400);
-    background-color: black;
+    margin: 0;
+    p {
+        margin: 0;
+    }
 }

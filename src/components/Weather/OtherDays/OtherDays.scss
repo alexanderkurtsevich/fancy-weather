@@ -1,0 +1,36 @@
+@import "../../../style/fonts.scss";
+
+.other-days {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+
+    &__other-day {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content 1fr;
+    }
+    &__weekday {
+        @include font-montserrat(22,700);
+        grid-column: 1/3;
+        grid-row: 1/2;
+        text-transform: uppercase;
+    }
+
+    &__temp {
+        grid-column: 1/2;
+        grid-row: 2/3;
+
+        @include font-montserrat(80, 600);
+
+        &::after {
+            content: "°";
+        }
+    }
+
+    &__icon {
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}

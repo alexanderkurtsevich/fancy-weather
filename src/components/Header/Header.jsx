@@ -9,7 +9,7 @@ const Header = (props) => {
         requestData()
     }, [requestData])
     return (
-        <div className='header'>
+        <div className={`${props.className} header`}>
             <Settings
                 className='header__settings'
                 language={props.language}
@@ -22,6 +22,7 @@ const Header = (props) => {
             />
             <Search
                 className='header__search'
+                language={props.language}
             />
         </div>
     )

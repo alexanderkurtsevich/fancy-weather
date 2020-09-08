@@ -1,0 +1,9 @@
+@import '../../../style/fonts.scss';
+
+.location {
+    &__place {
+        @include font-montserrat(44, 700);
+        margin: 0;
+        text-transform: uppercase;
+    }
+}
