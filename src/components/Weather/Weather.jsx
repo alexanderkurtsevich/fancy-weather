@@ -11,6 +11,8 @@ const Weather = (props) => {
             <Location
                 className='weather__location'
                 place={props.place}
+                offset={props.offset}
+                language={props.language}
             />
             <MainDay
                 mainDay={props.mainDay}

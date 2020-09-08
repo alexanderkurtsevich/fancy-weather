@@ -1,9 +1,14 @@
-@import '../../../style/fonts.scss';
+@import "../../../style/fonts.scss";
 
 .location {
     &__place {
-        @include font-montserrat(44, 700);
         margin: 0;
+
         text-transform: uppercase;
+
+        @include font-montserrat(44, 700);
+    }
+    &__date-time {
+        @include font-montserrat(24, 600);
     }
 }

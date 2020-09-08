@@ -8,6 +8,7 @@ const mapStateToProps = state => {
         otherDays: state.weather.other,
         language: state.settings.language,
         degrees: state.settings.degrees,
+        offset: state.location.offset,
     }
 }
 

@@ -53,7 +53,6 @@ async function getUsersCoordinates() {
 }
 
 async function getGeocodingInfo(query, language) {
-    console.log(language)
     const geocodingURL = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=7b09b9a9fd0842e6ad9e13896d7a8f4c&pretty=1&language=${language}`;
     const geocodingData = await axios.get(geocodingURL);
     const geocodingInfo = geocodingData.data.results[0]

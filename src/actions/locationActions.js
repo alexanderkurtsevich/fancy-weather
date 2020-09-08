@@ -10,6 +10,8 @@ export function setGeocodingInfo(geocodingInfo) {
     const geocoding = geocodingInfo.components;
     const coordinates = geocodingInfo.annotations.DMS;
     const geometry = geocodingInfo.geometry;
+    const offset = geocodingInfo.annotations.timezone.offset_sec;
+    console.log(geocodingInfo)
     return {
         type: types.SET_GEOCODING_INFO,
         payload: {
@@ -19,6 +21,7 @@ export function setGeocodingInfo(geocodingInfo) {
             lat: formatCoordinates(coordinates.lat),
             lng: formatCoordinates(coordinates.lng),
             geometry,
+            offset,
         }
     }
 }

@@ -27,9 +27,3 @@ export function changeBG() {
         type: types.CHANGE_BG,
     }
 }
-
-function changeLanguage() {
-    return {
-        type: types.CHANGE_LANGUAGE
-    }
-}

@@ -9,7 +9,12 @@ body {
     color: $font-color;
     @include font-montserrat(16, 400);
     margin: 0;
+    height: 100%;
     p {
         margin: 0;
     }
+}
+
+#root {
+    height: 100%;
 }
