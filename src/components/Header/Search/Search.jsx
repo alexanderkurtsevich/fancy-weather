@@ -11,7 +11,6 @@ const Search = (props) => {
         const value = event.target.value;
         setInputValue(value);
     }
-    console.log(inputValue)
     return (
         <div className={`${props.className} search`}>
             <input

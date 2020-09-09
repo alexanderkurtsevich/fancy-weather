@@ -13,18 +13,23 @@ export default function* sagaWatcher() {
 }
 
 function* dataRequest() {
-    const language = yield select(getLanguage);
-    const degrees = yield select(getDegrees);
-    const searchQuery = yield select(getSearchQuery);
+    try {
+        const language = yield select(getLanguage);
+        const degrees = yield select(getDegrees);
+        const searchQuery = yield select(getSearchQuery);
 
-    const query = yield (searchQuery || call(getUsersCoordinates));
+        const query = yield (searchQuery || call(getUsersCoordinates));
 
-    const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
-    yield put(setGeocodingInfo(geocodingInfo));
+        const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
+        yield put(setGeocodingInfo(geocodingInfo));
 
-    const geometry = yield select(getGeometry);
-    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees));
-    yield put(setWeatherInfo(weatherInfo));
+        const geometry = yield select(getGeometry);
+        const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees));
+        yield put(setWeatherInfo(weatherInfo));
+    }
+    catch (e) {
+        console.log(e.message)
+    }
 }
 
 function* changeDegreesRequest() {
@@ -46,7 +51,7 @@ async function getGeocodingInfo(query, language) {
     const geocodingURL = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=7b09b9a9fd0842e6ad9e13896d7a8f4c&pretty=1&language=${language}`;
     const geocodingData = await axios.get(geocodingURL);
     const geocodingInfo = geocodingData.data.results[0]
-    console.log(geocodingData)
+    if (!geocodingInfo) throw new Error('No results')
     return geocodingInfo;
 }
 
