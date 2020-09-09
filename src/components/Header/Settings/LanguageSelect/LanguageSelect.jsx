@@ -1,11 +1,11 @@
 import React from 'react';
 import './LanguageSelect.scss';
-import { LANGUAGES, TEXT } from '../../../../constants/constants';
+import { LANGUAGES } from '../../../../constants/constants';
+import { useTranslation } from "react-i18next";
 
 const LanguageSelect = (props) => {
     const language = props.language;
-    const {EN, RU} = TEXT[language];
-    const CURRENT_LANG = TEXT[language][language.toUpperCase()]
+    const { t } = useTranslation()
     const isOpen = props.isSelectOpened;
     const selectedLangClassName = isOpen
         ? 'language-select__selected-language language-select__selected-language_open'
@@ -18,7 +18,7 @@ const LanguageSelect = (props) => {
             <div
                 className={selectedLangClassName}
             >
-                <p className='language-select__language'>{CURRENT_LANG}</p>
+                <p className='language-select__language'>{t(`${language}`)}</p>
                 <div className='language-select__arrow'></div>
             </div>
             {isOpen
@@ -30,13 +30,13 @@ const LanguageSelect = (props) => {
                         className='language-select__select-item'
                         onClick={() => props.selectLanguage(LANGUAGES.EN)}
                     >
-                        {EN}
+                        {t('en')}
                     </div>
                     <div
                         className='language-select__select-item'
                         onClick={() => props.selectLanguage(LANGUAGES.RU)}
                     >
-                        {RU}
+                        {t('ru')}
                     </div>
                 </div>
                 : null}

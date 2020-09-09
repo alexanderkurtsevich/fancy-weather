@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import i18n from 'i18next';
 
 export function openCloseSelect() {
     return {
@@ -8,6 +9,7 @@ export function openCloseSelect() {
 
 export function selectLanguage(language) {
     localStorage.language = language;
+    i18n.changeLanguage(language);
     return {
         type: types.SELECT_LANGUAGE,
         language

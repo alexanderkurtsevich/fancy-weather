@@ -1,18 +1,16 @@
 import React from 'react';
 import './MainDay.scss';
-import { TEXT } from '../../../constants/constants';
 import iconCodes from '../../../constants/iconCodes';
+import { useTranslation } from "react-i18next";
 
 const MainDay = (props) => {
+    const { t } = useTranslation();
     if (!props.mainDay.icon) {
         return null
     }
-    const language = props.language;
     const degrees = props.degrees;
     const mainDay = props.mainDay;
     const iconSrc = iconCodes[mainDay.icon]
-
-    const { APPARENT, WIND_UNITS, WIND, HUMIDITY } = TEXT[language];
     return (
         <div className={`${props.className} main-day`}>
             <p className='main-day__temp'>{`${mainDay.temp}`}</p>
@@ -22,9 +20,9 @@ const MainDay = (props) => {
             </div>
             <div className='main-day__info'>
                 <p className='main-day__description'>{mainDay.description}</p>
-                <p className='main-day__apparent'>{`${APPARENT} ${mainDay.apparent}°`}</p>
-                <p className='main-day__wind'>{`${WIND} ${mainDay.wind} ${WIND_UNITS[degrees]}`}</p>
-                <p className='main-day__humidity'>{`${HUMIDITY} ${mainDay.humidity}%`}</p>
+                <p className='main-day__apparent'>{`${t('apparent')} ${mainDay.apparent}°`}</p>
+                <p className='main-day__wind'>{`${t('wind')} ${mainDay.wind} ${t(`wind_units.${degrees}`)}`}</p>
+                <p className='main-day__humidity'>{`${t('humidity')} ${mainDay.humidity}%`}</p>
             </div>
         </div>
     )

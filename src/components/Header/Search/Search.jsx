@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import './Search.scss';
-import { TEXT } from '../../../constants/constants';
-import { searchRequest } from '../../../actions/settingsActions';
+import { useTranslation } from "react-i18next";
 
 const Search = (props) => {
-    const language = props.language;
-    const { SEARCH, PLACEHOLDER } = TEXT[language]
+    const { t } = useTranslation()
     const [inputValue, setInputValue] = useState('');
     const onInputChange = function (event) {
         const value = event.target.value;
@@ -16,7 +14,7 @@ const Search = (props) => {
             <input
                 className='search__input'
                 type='text'
-                placeholder={PLACEHOLDER}
+                placeholder={t('placeholder')}
                 onChange={onInputChange}
                 value={inputValue}
             />
@@ -24,7 +22,7 @@ const Search = (props) => {
                 className='search__button'
                 onClick={() => props.searchRequest(inputValue)}
             >
-                {SEARCH}
+                {t('search')}
             </button>
         </div>
     )
