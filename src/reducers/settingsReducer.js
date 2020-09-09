@@ -5,6 +5,7 @@ const initialState = {
     language: localStorage.language || LANGUAGES.EN,
     degrees: localStorage.degrees || DEGREES.C,
     isSelectOpened: false,
+    isLoading: false,
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -29,10 +30,19 @@ export default function settingsReducer(state = initialState, action) {
                 ...state,
             }
         case types.SEARCH_REQUEST:
-            console.log(action.payload)
             return {
                 ...state, 
                 searchQuery: action.payload,
+            }
+        case types.START_LOADING:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case types.FINISH_LOADING:
+            return {
+                ...state,
+                isLoading: false,
             }
         default: return state;
     }

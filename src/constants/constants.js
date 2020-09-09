@@ -16,7 +16,6 @@ export const TIME_OPTIONS = {
     minute: '2-digit',
     hour12: false,
 }
-
 export const MIN_TO_MS = 60000;
 export const SEC_TO_MS = 1000;
 export const COMMA_REG_EXP = /,/g;

@@ -4,6 +4,7 @@ import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
 import { getGeometry, getDegrees, getLanguage, getSearchQuery } from '../selectors/selectors';
 import { getUsersCoordinates, getGeocodingInfo, getWeatherInfo } from './apiRequests';
+import { startLoading, finishLoading } from '../actions/settingsActions';
 
 export default function* sagaWatcher() {
     yield takeEvery(types.REQUEST_DATA, dataRequest)
@@ -17,6 +18,8 @@ function* dataRequest() {
         const language = yield select(getLanguage);
         const degrees = yield select(getDegrees);
         const searchQuery = yield select(getSearchQuery);
+        
+        yield put(startLoading())
 
         const query = yield (searchQuery || call(getUsersCoordinates));
 
@@ -26,6 +29,7 @@ function* dataRequest() {
         const geometry = yield select(getGeometry);
         const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees));
         yield put(setWeatherInfo(weatherInfo));
+        yield put(finishLoading())
     }
     catch (e) {
         console.log(e.message)

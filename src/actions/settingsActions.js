@@ -36,3 +36,15 @@ export function searchRequest(searchQuery) {
         payload: searchQuery,
     }
 }
+
+export function startLoading(){
+    return {
+        type: types.START_LOADING,
+    }
+}
+
+export function finishLoading(){
+    return {
+        type: types.FINISH_LOADING,
+    }
+}

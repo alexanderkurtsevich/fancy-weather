@@ -1,0 +1,14 @@
+.weather{
+    min-height: 528px;
+    width: 725px;
+    position: relative;
+    &__loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 140px;
+        bottom: 0;
+        margin: auto;
+        width: 50px;
+    }
+}

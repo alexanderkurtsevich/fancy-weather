@@ -9,6 +9,7 @@ const mapStateToProps = state => {
         language: state.settings.language,
         degrees: state.settings.degrees,
         offset: state.location.offset,
+        isLoading: state.settings.isLoading,
     }
 }
 
