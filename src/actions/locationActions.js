@@ -11,13 +11,13 @@ export function setGeocodingInfo(geocodingInfo) {
     const coordinates = geocodingInfo.annotations.DMS;
     const geometry = geocodingInfo.geometry;
     const offset = geocodingInfo.annotations.timezone.offset_sec;
-    console.log(geocodingInfo)
+    const city = geocoding.city || geocoding.state;
     return {
         type: types.SET_GEOCODING_INFO,
         payload: {
-            city: geocoding.city,
+            city,
             country: geocoding.country,
-            place: `${geocoding.city}, ${geocoding.country}`,
+            place: `${city}, ${geocoding.country}`,
             lat: formatCoordinates(coordinates.lat),
             lng: formatCoordinates(coordinates.lng),
             geometry,

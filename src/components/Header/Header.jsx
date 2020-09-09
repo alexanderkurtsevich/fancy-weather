@@ -23,6 +23,7 @@ const Header = (props) => {
             <Search
                 className='header__search'
                 language={props.language}
+                searchRequest={props.searchRequest}
             />
         </div>
     )

@@ -9,6 +9,7 @@
         @include font-montserrat(44, 700);
     }
     &__date-time {
+        text-transform: capitalize;
         @include font-montserrat(24, 600);
     }
 }

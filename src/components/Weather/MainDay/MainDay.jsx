@@ -7,7 +7,6 @@ const MainDay = (props) => {
     if (!props.mainDay.icon) {
         return null
     }
-    console.log(props.mainDay)
     const language = props.language;
     const degrees = props.degrees;
     const mainDay = props.mainDay;

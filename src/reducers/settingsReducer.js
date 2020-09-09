@@ -28,6 +28,12 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
             }
+        case types.SEARCH_REQUEST:
+            console.log(action.payload)
+            return {
+                ...state, 
+                searchQuery: action.payload,
+            }
         default: return state;
     }
 }

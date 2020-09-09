@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Search.scss';
 import { TEXT } from '../../../constants/constants';
+import { searchRequest } from '../../../actions/settingsActions';
 
 const Search = (props) => {
     const language = props.language;
@@ -10,6 +11,7 @@ const Search = (props) => {
         const value = event.target.value;
         setInputValue(value);
     }
+    console.log(inputValue)
     return (
         <div className={`${props.className} search`}>
             <input
@@ -19,7 +21,12 @@ const Search = (props) => {
                 onChange={onInputChange}
                 value={inputValue}
             />
-            <button className='search__button'>{SEARCH}</button>
+            <button
+                className='search__button'
+                onClick={() => props.searchRequest(inputValue)}
+            >
+                {SEARCH}
+            </button>
         </div>
     )
 }

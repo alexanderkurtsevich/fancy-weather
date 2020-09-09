@@ -27,3 +27,10 @@ export function changeBG() {
         type: types.CHANGE_BG,
     }
 }
+
+export function searchRequest(searchQuery) {
+    return {
+        type: types.SEARCH_REQUEST,
+        payload: searchQuery,
+    }
+}

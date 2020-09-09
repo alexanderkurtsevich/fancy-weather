@@ -3,20 +3,23 @@ import * as types from '../constants/actionTypes';
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
-import { getGeometry, getDegrees, getLanguage } from '../selectors/selectors';
+import { getGeometry, getDegrees, getLanguage, getSearchQuery } from '../selectors/selectors';
 
 export default function* sagaWatcher() {
-    yield takeEvery(types.REQUEST_DATA, initDataRequest)
+    yield takeEvery(types.REQUEST_DATA, dataRequest)
     yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
-    yield takeEvery(types.SELECT_LANGUAGE, changeLanguageRequest)
+    yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
+    yield takeEvery(types.SEARCH_REQUEST, dataRequest)
 }
 
-function* initDataRequest() {
+function* dataRequest() {
     const language = yield select(getLanguage);
     const degrees = yield select(getDegrees);
+    const searchQuery = yield select(getSearchQuery);
 
-    const usersCoordinates = yield call(getUsersCoordinates);
-    const geocodingInfo = yield call(() => getGeocodingInfo(usersCoordinates, language));
+    const query = yield (searchQuery || call(getUsersCoordinates));
+
+    const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
     yield put(setGeocodingInfo(geocodingInfo));
 
     const geometry = yield select(getGeometry);
@@ -33,19 +36,6 @@ function* changeDegreesRequest() {
     yield put(setWeatherInfo(weatherInfo));
 }
 
-function* changeLanguageRequest() {
-    const geometry = yield select(getGeometry);
-    const language = yield select(getLanguage);
-    const degrees = yield select(getDegrees);
-
-    const usersCoordinates = yield call(getUsersCoordinates);
-    const geocodingInfo = yield call(() => getGeocodingInfo(usersCoordinates, language));
-    yield put(setGeocodingInfo(geocodingInfo));
-
-    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
-    yield put(setWeatherInfo(weatherInfo));
-}
-
 async function getUsersCoordinates() {
     const locationData = await axios.get('https://ipinfo.io/json?token=931b78bb2d8d90');
     const coordinates = locationData.data.loc;
@@ -56,6 +46,7 @@ async function getGeocodingInfo(query, language) {
     const geocodingURL = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=7b09b9a9fd0842e6ad9e13896d7a8f4c&pretty=1&language=${language}`;
     const geocodingData = await axios.get(geocodingURL);
     const geocodingInfo = geocodingData.data.results[0]
+    console.log(geocodingData)
     return geocodingInfo;
 }
 

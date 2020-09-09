@@ -3,7 +3,6 @@ import * as types from '../constants/actionTypes';
 export function setWeatherInfo(weatherInfo) {
     const mainDay = weatherInfo[0];
     const otherDays = weatherInfo.slice(1);
-    console.log(otherDays)
     return {
         type: types.SET_WEATHER_INFO,
         payload: {
