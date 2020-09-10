@@ -19,3 +19,13 @@ export const TIME_OPTIONS = {
 export const MIN_TO_MS = 60000;
 export const SEC_TO_MS = 1000;
 export const COMMA_REG_EXP = /,/g;
+
+export const ERRORS = {
+    EMPTY: 'empty',
+    NO_RESULTS: 'no_results',
+    FAILED: 'failed',
+}
+
+export const TOKENS = {
+    MAP: 'pk.eyJ1IjoiYWxleGFuZGVya3VydHNldmljaDEiLCJhIjoiY2tld2dlcjV2NDMyZjJycGlxbTVmMm9ybSJ9.0q69qxF73HxB4TG4LKQSGg',
+}

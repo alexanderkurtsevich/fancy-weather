@@ -17,6 +17,11 @@ i18n.init({
                     F: 'mph',
                 },
                 humidity: 'humidity:',
+                empty: 'This field cannot be empty',
+                no_results: 'No results were found for your search :(',
+                failed: 'Oops! Something went wrong :(',
+                latitude: 'Latitude:',
+                longtitude: 'Longtitude:',
             }
         },
         [LANGUAGES.RU]: {
@@ -32,6 +37,11 @@ i18n.init({
                     F: 'миль/ч',
                 },
                 humidity: 'влажность:',
+                empty: 'Данное поле не может быть пустым',
+                no_results: 'По вашему запросу ничего не найдено :(',
+                failed: 'Упс! что-то пошло не так :(',
+                latitude: 'Широта:',
+                longtitude: 'Долгота:',
             }
         }
     },

@@ -1,17 +1,15 @@
 import * as types from '../constants/actionTypes';
 
-export function requestData() {
+export function initialRequest() {
     return {
-        type: types.REQUEST_DATA
+        type: types.INITIAL_REQUEST
     }
 }
 
 export function setGeocodingInfo(geocodingInfo) {
     const geocoding = geocodingInfo.components;
     const coordinates = geocodingInfo.annotations.DMS;
-    const geometry = geocodingInfo.geometry;
-    const offset = geocodingInfo.annotations.timezone.offset_sec;
-    const city = geocoding.city || geocoding.state;
+    const city = geocoding.city || geocoding.town || geocoding.state;
     return {
         type: types.SET_GEOCODING_INFO,
         payload: {
@@ -20,8 +18,8 @@ export function setGeocodingInfo(geocodingInfo) {
             place: `${city}, ${geocoding.country}`,
             lat: formatCoordinates(coordinates.lat),
             lng: formatCoordinates(coordinates.lng),
-            geometry,
-            offset,
+            geometry: geocodingInfo.geometry,
+            offset: geocodingInfo.annotations.timezone.offset_sec,
         }
     }
 }

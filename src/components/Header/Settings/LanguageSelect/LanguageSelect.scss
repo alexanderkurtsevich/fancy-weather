@@ -52,17 +52,18 @@
         width: 71px;
         height: 44px;
 
-        background-color: $dark-gray;
+        background-color: $drop-menu-dark-gray;
 
         transition: $fast-transition;
 
         &:hover {
-            background-color: $dark-gray-hover;
+            background-color: $drop-menu-dark-gray-hover;
         }
     }
 
     &__drop-menu {
         position: absolute;
+        z-index: 1;
 
         overflow: hidden;
 

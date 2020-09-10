@@ -1,11 +1,13 @@
-import { LANGUAGES, DEGREES } from '../constants/constants';
+import { LANGUAGES, DEGREES, ERRORS } from '../constants/constants';
 import * as types from '../constants/actionTypes';
 
 const initialState = {
     language: localStorage.language || LANGUAGES.EN,
     degrees: localStorage.degrees || DEGREES.C,
     isSelectOpened: false,
-    isLoading: false,
+    isLoading: true,
+    isInitialized: false,
+    notification: null,
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -18,9 +20,10 @@ export default function settingsReducer(state = initialState, action) {
         case types.SELECT_LANGUAGE:
             return {
                 ...state,
-                language: action.language
+                language: action.language,
             }
         case types.SELECT_DEGREES:
+            if (state.degrees === action.degrees) return state
             return {
                 ...state,
                 degrees: action.degrees
@@ -31,18 +34,39 @@ export default function settingsReducer(state = initialState, action) {
             }
         case types.SEARCH_REQUEST:
             return {
-                ...state, 
+                ...state,
                 searchQuery: action.payload,
             }
         case types.START_LOADING:
             return {
                 ...state,
                 isLoading: true,
+                notification: null,
             }
         case types.FINISH_LOADING:
             return {
                 ...state,
                 isLoading: false,
+            }
+        case types.EMPTY_QUERY:
+            return {
+                ...state,
+                notification: ERRORS.EMPTY,
+            }
+        case types.REQUEST_FAILED:
+            return {
+                ...state,
+                notification: ERRORS.FAILED,
+            }
+        case types.NO_RESULTS:
+            return {
+                ...state,
+                notification: ERRORS.NO_RESULTS,
+            }
+        case types.SET_INITIALIZED:
+            return {
+                ...state,
+                isInitialized: true,
             }
         default: return state;
     }

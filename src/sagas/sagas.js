@@ -4,44 +4,70 @@ import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
 import { getGeometry, getDegrees, getLanguage, getSearchQuery } from '../selectors/selectors';
 import { getUsersCoordinates, getGeocodingInfo, getWeatherInfo } from './apiRequests';
-import { startLoading, finishLoading } from '../actions/settingsActions';
+import { startLoading, finishLoading, requestFailed, noResults, setInitialized } from '../actions/settingsActions';
+import { ERRORS } from '../constants/constants';
 
 export default function* sagaWatcher() {
-    yield takeEvery(types.REQUEST_DATA, dataRequest)
+    yield takeEvery(types.INITIAL_REQUEST, initialRequest)
     yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
     yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
     yield takeEvery(types.SEARCH_REQUEST, dataRequest)
 }
 
-function* dataRequest() {
+
+function* sagaGeocoding() {
     try {
         const language = yield select(getLanguage);
-        const degrees = yield select(getDegrees);
         const searchQuery = yield select(getSearchQuery);
-        
-        yield put(startLoading())
-
         const query = yield (searchQuery || call(getUsersCoordinates));
 
         const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
         yield put(setGeocodingInfo(geocodingInfo));
-
-        const geometry = yield select(getGeometry);
-        const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees));
-        yield put(setWeatherInfo(weatherInfo));
-        yield put(finishLoading())
     }
     catch (e) {
-        console.log(e.message)
+        if (e.message === ERRORS.NO_RESULTS) {
+            yield put(noResults());
+        }
+        else {
+            yield put(requestFailed())
+        }
     }
+}
+
+
+function* sagaWeather() {
+    try {
+        const geometry = yield select(getGeometry);
+        const language = yield select(getLanguage);
+        const degrees = yield select(getDegrees);
+
+        const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
+        yield put(setWeatherInfo(weatherInfo));
+    }
+    catch (e) {
+        yield put(requestFailed())
+    }
+}
+
+function* initialRequest() {
+    console.log('hi')
+    yield call(dataRequest);
+    yield put(setInitialized())
+}
+
+function* dataRequest() {
+        yield put(startLoading())
+        
+        yield call(sagaGeocoding)
+        yield call(sagaWeather)
+
+        yield put(finishLoading())
 }
 
 function* changeDegreesRequest() {
-    const geometry = yield select(getGeometry);
-    const language = yield select(getLanguage);
-    const degrees = yield select(getDegrees);
+        yield put(startLoading())
 
-    const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
-    yield put(setWeatherInfo(weatherInfo));
+        yield call(sagaWeather)
+
+        yield put(finishLoading())
 }
-

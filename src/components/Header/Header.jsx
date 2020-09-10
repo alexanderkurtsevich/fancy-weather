@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import './Header.scss';
 import Settings from './Settings/Settings';
 import Search from './Search/Search';
+import { useTranslation } from "react-i18next";
 
 const Header = (props) => {
-    const { requestData } = props;
+    const { t } = useTranslation();
+    const { initialRequest } = props;
     useEffect(() => {
-        requestData()
-    }, [requestData])
+        initialRequest()
+        console.log('wupupidu')
+    }, [initialRequest])
     return (
         <div className={`${props.className} header`}>
             <Settings
@@ -25,6 +28,10 @@ const Header = (props) => {
                 language={props.language}
                 searchRequest={props.searchRequest}
             />
+            {props.notification
+                ? <p className='header__notifications'>{t(props.notification)}</p>
+                : null}
+
         </div>
     )
 }

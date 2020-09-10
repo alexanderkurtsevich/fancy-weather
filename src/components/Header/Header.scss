@@ -1,6 +1,23 @@
+@import '../../style/constants.scss';
+
 .header {
+    position: relative;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
     height: 124px;
+
+    &__notifications {
+        position: absolute;
+        right: 0;
+        bottom: 0px;
+
+        padding: 5px 15px;
+
+        color: $notifications-font-color;
+        border-radius: $border-radius;
+        background-color: $notifications-bg-color;
+    }
 }

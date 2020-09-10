@@ -1,8 +1,11 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-    city: 'Minsk',
-    country: 'Belarus',
+    place: null,
+    lat: null,
+    lng: null,
+    geometry: {},
+    offset: null,
 }
 
 export default function locationRecuder(state = initialState, action) {

@@ -31,20 +31,41 @@ export function changeBG() {
 }
 
 export function searchRequest(searchQuery) {
+    const isEmpty = searchQuery.trim().length === 0;
+    if (isEmpty) return { type: types.EMPTY_QUERY }
+
     return {
         type: types.SEARCH_REQUEST,
         payload: searchQuery,
     }
 }
 
-export function startLoading(){
+export function startLoading() {
     return {
         type: types.START_LOADING,
     }
 }
 
-export function finishLoading(){
+export function finishLoading() {
     return {
         type: types.FINISH_LOADING,
+    }
+}
+
+export function requestFailed() {
+    return {
+        type: types.REQUEST_FAILED
+    }
+}
+
+export function noResults() {
+    return {
+        type: types.NO_RESULTS
+    }
+}
+
+export function setInitialized() {
+    return {
+        type: types.SET_INITIALIZED,
     }
 }

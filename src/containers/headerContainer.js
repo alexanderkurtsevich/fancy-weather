@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
 import { selectLanguage, openCloseSelect, selectDegrees, changeBG, searchRequest } from '../actions/settingsActions';
-import { requestData } from '../actions/locationActions';
+import { initialRequest } from '../actions/locationActions';
 
 const mapStateToProps = state => {
     return {
         language: state.settings.language,
         degrees: state.settings.degrees,
         isSelectOpened: state.settings.isSelectOpened,
+        notification: state.settings.notification,
     }
 }
 
@@ -17,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
         selectLanguage: (language) => dispatch(selectLanguage(language)),
         selectDegrees: (degrees) => dispatch(selectDegrees(degrees)),
         changeBG: () => dispatch(changeBG()),
-        requestData: () => dispatch(requestData()),
+        initialRequest: () => dispatch(initialRequest()),
         searchRequest: (searchQuery) => dispatch(searchRequest(searchQuery))
     }
 }
