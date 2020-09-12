@@ -9,7 +9,7 @@ const Settings = (props) => {
         <div className={`${props.className} settings`}>
             <ChangeBackground
                 className='settings__change-background'
-                changeBG={props.changeBG}
+                changeBackground={props.changeBackground}
             />
             <LanguageSelect
                 className='settings__language-select'

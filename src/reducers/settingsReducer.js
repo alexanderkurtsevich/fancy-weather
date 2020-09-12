@@ -10,6 +10,7 @@ const initialState = {
     notification: null,
     searchQuery: null,
     cache: {},
+    backgroundUrl: null
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -30,7 +31,7 @@ export default function settingsReducer(state = initialState, action) {
                 ...state,
                 degrees: action.degrees
             }
-        case types.CHANGE_BG:
+        case types.CHANGE_BACKGROUND:
             return {
                 ...state,
             }
@@ -87,6 +88,11 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
                 cache: {}
+            }
+        case types.SET_BACKGROUND:
+            return {
+                ...state,
+                backgroundUrl: action.payload
             }
         default: return state;
     }

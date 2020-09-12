@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Header.scss';
 import Settings from './Settings/Settings';
 import Search from './Search/Search';
@@ -6,10 +6,6 @@ import { useTranslation } from "react-i18next";
 
 const Header = (props) => {
     const { t } = useTranslation();
-    const { initialRequest } = props;
-    useEffect(() => {
-        initialRequest()
-    }, [initialRequest])
     return (
         <div className={`${props.className} header`}>
             <Settings
@@ -20,7 +16,7 @@ const Header = (props) => {
                 openCloseSelect={props.openCloseSelect}
                 selectLanguage={props.selectLanguage}
                 selectDegrees={props.selectDegrees}
-                changeBG={props.changeBG}
+                changeBackground={props.changeBackground}
             />
             {props.notification
                 ? <p className='header__notifications'>{t(props.notification)}</p>

@@ -9,11 +9,12 @@ import {
     getLanguage,
     getSearchQuery,
     getCache
-} from '../selectors/selectors';
+} from './selectors';
 import {
     getUsersCoordinates,
     getGeocodingInfo,
-    getWeatherInfo
+    getWeatherInfo,
+    getBackgroundImage,
 } from './apiRequests';
 import {
     startLoading,
@@ -24,6 +25,7 @@ import {
     clearSearchQuery,
     cacheData,
     clearCache,
+    setBackground,
 } from '../actions/settingsActions';
 
 function* geocodingWorker() {
@@ -114,9 +116,15 @@ function* getCachedData(language, degrees) {
     return null;
 }
 
+function* backgroundWorker(){
+    const backgroundImage = yield call(getBackgroundImage);
+    yield put(setBackground(backgroundImage));
+}
+
 export default function* sagaWatcher() {
     yield takeEvery(types.INITIAL_REQUEST, initialRequest)
     yield takeEvery(types.SEARCH_REQUEST, searchRequest)
     yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
     yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
+    yield takeEvery(types.CHANGE_BACKGROUND, backgroundWorker)
 }

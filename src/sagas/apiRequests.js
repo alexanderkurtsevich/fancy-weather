@@ -23,3 +23,10 @@ export async function getWeatherInfo(geometry, language, degrees) {
     const geocodingInfo = weatherData.data.data;
     return geocodingInfo;
 }
+
+export async function getBackgroundImage() {
+    const backgroundUrl = `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&query=night,summer&client_id=${TOKENS.UNSPLASH}`;
+    const backgroundImageData = await axios.get(backgroundUrl)
+    const backgroundImage = backgroundImageData.data.urls.full;
+    return backgroundImage;
+}

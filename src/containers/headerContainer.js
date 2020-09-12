@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Header from '../components/Header/Header';
-import { selectLanguage, openCloseSelect, selectDegrees, changeBG, searchRequest } from '../actions/settingsActions';
+import { selectLanguage, openCloseSelect, selectDegrees, changeBackground, searchRequest } from '../actions/settingsActions';
 import { initialRequest } from '../actions/locationActions';
 
 const mapStateToProps = state => {
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
         openCloseSelect: () => dispatch(openCloseSelect()),
         selectLanguage: (language) => dispatch(selectLanguage(language)),
         selectDegrees: (degrees) => dispatch(selectDegrees(degrees)),
-        changeBG: () => dispatch(changeBG()),
+        changeBackground: () => dispatch(changeBackground()),
         initialRequest: () => dispatch(initialRequest()),
         searchRequest: (searchQuery) => dispatch(searchRequest(searchQuery))
     }

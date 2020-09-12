@@ -10,12 +10,14 @@ export function setGeocodingInfo(geocodingInfo) {
     const geocoding = geocodingInfo.components;
     const coordinates = geocodingInfo.annotations.DMS;
     const city = geocoding.city || geocoding.town || geocoding.state;
+    const country = geocoding.country;
+    const place = city ? `${city}, ${country}` : country;
     return {
         type: types.SET_GEOCODING_INFO,
         payload: {
             city,
-            country: geocoding.country,
-            place: `${city}, ${geocoding.country}`,
+            country,
+            place,
             lat: formatCoordinates(coordinates.lat),
             lng: formatCoordinates(coordinates.lng),
             geometry: geocodingInfo.geometry,

@@ -7,7 +7,7 @@ const ChangeBackground = (props) => {
     return (
         <div
             className={`${props.className} change-background`}
-            onClick={props.changeBG}
+            onClick={props.changeBackground}
         >
             <img
                 className='change-background__image'

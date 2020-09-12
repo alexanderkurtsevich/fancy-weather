@@ -25,9 +25,16 @@ export function selectDegrees(degrees) {
     }
 }
 
-export function changeBG() {
+export function changeBackground() {
     return {
-        type: types.CHANGE_BG,
+        type: types.CHANGE_BACKGROUND,
+    }
+}
+
+export function setBackground(url) {
+    return {
+        type: types.SET_BACKGROUND,
+        payload: url,
     }
 }
 
