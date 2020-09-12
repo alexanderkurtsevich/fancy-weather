@@ -34,3 +34,5 @@ export const TOKENS = {
 }
 
 export const ENTER_KEY = 'Enter';
+export const WEATHER_DATA = 'weatherData';
+export const GEOCODING_DATA = 'geocodingData';

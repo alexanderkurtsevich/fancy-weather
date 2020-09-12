@@ -9,6 +9,7 @@ const initialState = {
     isInitialized: false,
     notification: null,
     searchQuery: null,
+    cache: {},
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -73,6 +74,19 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
                 searchQuery: null,
+            }
+        case types.CACHE_DATA:
+            return {
+                ...state,
+                cache: {
+                    ...state.cache,
+                    ...action.payload
+                },
+            }
+        case types.CLEAR_CACHE:
+            return {
+                ...state,
+                cache: {}
             }
         default: return state;
     }

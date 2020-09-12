@@ -15,3 +15,5 @@ export const NO_RESULTS = 'NO_RESULTS';
 export const SET_INITIALIZED = 'SET_INITIALIZED';
 export const INITIAL_REQUEST = 'INITIAL_REQUEST';
 export const CLEAR_SEARCH_QUERY = 'CLEAR_SEARCH_QUERY';
+export const CACHE_DATA = 'CACHE_DATA';
+export const CLEAR_CACHE = 'CLEAR_CACHE';

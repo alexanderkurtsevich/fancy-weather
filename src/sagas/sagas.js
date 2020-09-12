@@ -2,27 +2,45 @@ import * as types from '../constants/actionTypes';
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
-import { getGeometry, getDegrees, getLanguage, getSearchQuery } from '../selectors/selectors';
-import { getUsersCoordinates, getGeocodingInfo, getWeatherInfo } from './apiRequests';
-import { startLoading, finishLoading, requestFailed, noResults, setInitialized, clearSearchQuery } from '../actions/settingsActions';
-import { ERRORS } from '../constants/constants';
+import { ERRORS, WEATHER_DATA, GEOCODING_DATA } from '../constants/constants';
+import {
+    getGeometry,
+    getDegrees,
+    getLanguage,
+    getSearchQuery,
+    getCache
+} from '../selectors/selectors';
+import {
+    getUsersCoordinates,
+    getGeocodingInfo,
+    getWeatherInfo
+} from './apiRequests';
+import {
+    startLoading,
+    finishLoading,
+    requestFailed,
+    noResults,
+    setInitialized,
+    clearSearchQuery,
+    cacheData,
+    clearCache,
+} from '../actions/settingsActions';
 
-export default function* sagaWatcher() {
-    yield takeEvery(types.INITIAL_REQUEST, initialRequest)
-    yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
-    yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
-    yield takeEvery(types.SEARCH_REQUEST, dataRequest)
-}
-
-
-function* sagaGeocoding() {
+function* geocodingWorker() {
     try {
         const language = yield select(getLanguage);
         const searchQuery = yield select(getSearchQuery);
-        const query = yield (searchQuery || call(getUsersCoordinates));
+        const cachedData = yield call(() => getCachedData(language));
 
-        const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
-        yield put(setGeocodingInfo(geocodingInfo));
+        if (cachedData) {
+            yield put(setGeocodingInfo(cachedData));
+        }
+        else {
+            const query = yield (searchQuery || call(getUsersCoordinates));
+            const geocodingInfo = yield call(() => getGeocodingInfo(query, language));
+            yield put(setGeocodingInfo(geocodingInfo));
+            yield put(cacheData(geocodingInfo, language))
+        }
     }
     catch (e) {
         if (e.message === ERRORS.NO_RESULTS) {
@@ -35,14 +53,21 @@ function* sagaGeocoding() {
     }
 }
 
-function* sagaWeather() {
+function* weatherWorker() {
     try {
-        const geometry = yield select(getGeometry);
         const language = yield select(getLanguage);
         const degrees = yield select(getDegrees);
+        const cachedData = yield call(() => getCachedData(language, degrees))
 
-        const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
-        yield put(setWeatherInfo(weatherInfo));
+        if (cachedData) {
+            yield put(setWeatherInfo(cachedData));
+        }
+        else {
+            const geometry = yield select(getGeometry);
+            const weatherInfo = yield call(() => getWeatherInfo(geometry, language, degrees))
+            yield put(setWeatherInfo(weatherInfo));
+            yield put(cacheData(weatherInfo, language, degrees))
+        }
     }
     catch (e) {
         yield put(requestFailed())
@@ -55,18 +80,43 @@ function* initialRequest() {
 }
 
 function* dataRequest() {
-        yield put(startLoading())
-        
-        yield call(sagaGeocoding)
-        yield call(sagaWeather)
+    yield put(startLoading())
 
-        yield put(finishLoading())
+    yield call(geocodingWorker)
+    yield call(weatherWorker)
+
+    yield put(finishLoading())
+}
+
+function* searchRequest() {
+    yield put(clearCache())
+    yield call(dataRequest)
 }
 
 function* changeDegreesRequest() {
-        yield put(startLoading())
+    yield put(startLoading())
 
-        yield call(sagaWeather)
+    yield call(weatherWorker)
 
-        yield put(finishLoading())
+    yield put(finishLoading())
+}
+
+function* getCachedData(language, degrees) {
+    const cache = yield select(getCache);
+    if (cache && !degrees) {
+        const key = `${language}${GEOCODING_DATA}`
+        return cache[key]
+    }
+    else if (cache) {
+        const key = `${language}${degrees}${WEATHER_DATA}`;
+        return cache[key]
+    }
+    return null;
+}
+
+export default function* sagaWatcher() {
+    yield takeEvery(types.INITIAL_REQUEST, initialRequest)
+    yield takeEvery(types.SEARCH_REQUEST, searchRequest)
+    yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
+    yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
 }

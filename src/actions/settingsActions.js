@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import { WEATHER_DATA, GEOCODING_DATA } from '../constants/constants';
 import i18n from 'i18next';
 
 export function openCloseSelect() {
@@ -64,7 +65,7 @@ export function noResults() {
     }
 }
 
-export function clearSearchQuery(){
+export function clearSearchQuery() {
     return {
         type: types.CLEAR_SEARCH_QUERY,
     }
@@ -73,5 +74,22 @@ export function clearSearchQuery(){
 export function setInitialized() {
     return {
         type: types.SET_INITIALIZED,
+    }
+}
+
+export function cacheData(data, language, degrees = '') {
+    const isWeatherInfo = Array.isArray(data);
+    const key = `${language}${degrees}${isWeatherInfo ? WEATHER_DATA : GEOCODING_DATA}`;
+    return {
+        type: types.CACHE_DATA,
+        payload: {
+            [key]: data,
+        }
+    }
+}
+
+export function clearCache() {
+    return {
+        type: types.CLEAR_CACHE
     }
 }
