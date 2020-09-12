@@ -1,14 +1,15 @@
-@import '../../style/constants.scss';
+@import "../../style/constants.scss";
 
 .header {
     position: relative;
 
     display: flex;
     align-items: center;
+    flex: none;
     justify-content: space-between;
 
-    height: 124px;
-
+    width: 100%;
+    min-height: 124px;
     &__notifications {
         position: absolute;
         right: 0;
@@ -19,5 +20,17 @@
         color: $notifications-font-color;
         border-radius: $border-radius;
         background-color: $notifications-bg-color;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header {
+        flex-direction: column-reverse;
+        justify-content: space-around;
+
+        &__notifications {
+            position: relative;
+            margin: 10px 0;
+        }
     }
 }

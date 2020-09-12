@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Search.scss';
 import { useTranslation } from "react-i18next";
+import { ENTER_KEY } from '../../../constants/constants';
 
 const Search = (props) => {
     const { t } = useTranslation()
@@ -8,6 +9,11 @@ const Search = (props) => {
     const onInputChange = function (event) {
         const value = event.target.value;
         setInputValue(value);
+    }
+    const enterKeyHandle = function (event) {
+        if (event.key === ENTER_KEY) {
+            props.searchRequest(inputValue)
+        }
     }
     return (
         <div className={`${props.className} search`}>
@@ -17,6 +23,7 @@ const Search = (props) => {
                 placeholder={t('placeholder')}
                 onChange={onInputChange}
                 value={inputValue}
+                onKeyPress={enterKeyHandle}
             />
             <button
                 className='search__button'

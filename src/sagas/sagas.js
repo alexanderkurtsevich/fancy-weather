@@ -4,7 +4,7 @@ import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
 import { getGeometry, getDegrees, getLanguage, getSearchQuery } from '../selectors/selectors';
 import { getUsersCoordinates, getGeocodingInfo, getWeatherInfo } from './apiRequests';
-import { startLoading, finishLoading, requestFailed, noResults, setInitialized } from '../actions/settingsActions';
+import { startLoading, finishLoading, requestFailed, noResults, setInitialized, clearSearchQuery } from '../actions/settingsActions';
 import { ERRORS } from '../constants/constants';
 
 export default function* sagaWatcher() {
@@ -27,13 +27,13 @@ function* sagaGeocoding() {
     catch (e) {
         if (e.message === ERRORS.NO_RESULTS) {
             yield put(noResults());
+            yield put(clearSearchQuery())
         }
         else {
             yield put(requestFailed())
         }
     }
 }
-
 
 function* sagaWeather() {
     try {
@@ -50,7 +50,6 @@ function* sagaWeather() {
 }
 
 function* initialRequest() {
-    console.log('hi')
     yield call(dataRequest);
     yield put(setInitialized())
 }

@@ -10,7 +10,7 @@ const MapContainer = (props) => {
     const { lng, lat } = props.geometry;
 
     useEffect(() => {
-        mapboxgl.accessToken = TOKENS.MAP;
+        mapboxgl.accessToken = TOKENS.MAPBOX;
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',

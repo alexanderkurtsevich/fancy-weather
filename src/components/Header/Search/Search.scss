@@ -1,5 +1,6 @@
 @import "../../../style/constants.scss";
 @import "../../../style/fonts.scss";
+@import "../../../style/placeholder.scss";
 
 .search {
     display: flex;
@@ -16,10 +17,9 @@
         border-radius: 0 $border-radius $border-radius 0;
         outline: none;
         background-color: $light-gray;
-        text-transform: uppercase;
 
         cursor: pointer;
-
+        text-transform: uppercase;
 @include font-montserrat(14, 700);
 
         &:hover {
@@ -38,24 +38,18 @@
         outline: none;
         background-color: $dark-gray;
 
+        @include search-placeholder(14);
+
         &:hover {
             background-color: $dark-gray-hover;
         }
+    }
+}
 
-        &::-webkit-input-placeholder {
-            opacity: .9;
-            color: $font-color;
-@include font-montserrat(14, 400);
-        }
-        &::-moz-placeholder {
-            opacity: .9;
-            color: $font-color;
-@include font-montserrat(14, 400);
-        }
-        &:-ms-input-placeholder {
-            opacity: .9;
-            color: $font-color;
-@include font-montserrat(14, 400);
+@media screen and (max-width: 767px) {
+    .search {
+        &__input {
+            @include search-placeholder(12);
         }
     }
 }

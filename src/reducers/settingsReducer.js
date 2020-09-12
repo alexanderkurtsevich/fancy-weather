@@ -8,6 +8,7 @@ const initialState = {
     isLoading: true,
     isInitialized: false,
     notification: null,
+    searchQuery: null,
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -67,6 +68,11 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
                 isInitialized: true,
+            }
+        case types.CLEAR_SEARCH_QUERY:
+            return {
+                ...state,
+                searchQuery: null,
             }
         default: return state;
     }

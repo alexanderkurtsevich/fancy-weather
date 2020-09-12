@@ -10,6 +10,23 @@
     }
     &__date-time {
         text-transform: capitalize;
+
         @include font-montserrat(24, 600);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .location {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        &__place {
+            text-align: center;
+        }
+
+        &__date-time {
+            text-align: center;
+        }
     }
 }

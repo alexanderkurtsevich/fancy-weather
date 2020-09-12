@@ -1,14 +1,28 @@
-.weather{
-    min-height: 528px;
-    width: 725px;
+@import "../../style/constants.scss";
+
+.weather {
     position: relative;
+
+    flex: none;
+
+    min-height: 528px;
     &__loader {
         position: absolute;
         top: 0;
-        left: 0;
         right: 140px;
         bottom: 0;
-        margin: auto;
+        left: 0;
+
         width: 50px;
+        margin: auto;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .weather {
+        &__loader {
+            bottom: $header-min-height;
+        }
+    }
+}
+

@@ -27,5 +27,10 @@ export const ERRORS = {
 }
 
 export const TOKENS = {
-    MAP: 'pk.eyJ1IjoiYWxleGFuZGVya3VydHNldmljaDEiLCJhIjoiY2tld2dlcjV2NDMyZjJycGlxbTVmMm9ybSJ9.0q69qxF73HxB4TG4LKQSGg',
+    MAPBOX: 'pk.eyJ1IjoiYWxleGFuZGVya3VydHNldmljaDEiLCJhIjoiY2tld2dlcjV2NDMyZjJycGlxbTVmMm9ybSJ9.0q69qxF73HxB4TG4LKQSGg',
+    IPINFO: '931b78bb2d8d90',
+    WEATHERBIT: 'b79f52f38c114829838840b5cbe85565',
+    OPENCAGE: '7b09b9a9fd0842e6ad9e13896d7a8f4c',
 }
+
+export const ENTER_KEY = 'Enter';

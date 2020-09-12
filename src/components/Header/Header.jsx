@@ -9,7 +9,6 @@ const Header = (props) => {
     const { initialRequest } = props;
     useEffect(() => {
         initialRequest()
-        console.log('wupupidu')
     }, [initialRequest])
     return (
         <div className={`${props.className} header`}>
@@ -23,15 +22,14 @@ const Header = (props) => {
                 selectDegrees={props.selectDegrees}
                 changeBG={props.changeBG}
             />
+            {props.notification
+                ? <p className='header__notifications'>{t(props.notification)}</p>
+                : null}
             <Search
                 className='header__search'
                 language={props.language}
                 searchRequest={props.searchRequest}
             />
-            {props.notification
-                ? <p className='header__notifications'>{t(props.notification)}</p>
-                : null}
-
         </div>
     )
 }

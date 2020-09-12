@@ -64,6 +64,12 @@ export function noResults() {
     }
 }
 
+export function clearSearchQuery(){
+    return {
+        type: types.CLEAR_SEARCH_QUERY,
+    }
+}
+
 export function setInitialized() {
     return {
         type: types.SET_INITIALIZED,

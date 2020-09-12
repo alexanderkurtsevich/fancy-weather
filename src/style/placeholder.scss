@@ -1,0 +1,23 @@
+@import "./constants.scss";
+@import "./fonts.scss";
+
+@mixin search-placeholder($size) {
+    &::-webkit-input-placeholder {
+        opacity: .9;
+        color: $font-color;
+
+        @include font-montserrat($size, 400);
+    }
+    &::-moz-placeholder {
+        opacity: .9;
+        color: $font-color;
+
+        @include font-montserrat($size, 400);
+    }
+    &:-ms-input-placeholder {
+        opacity: .9;
+        color: $font-color;
+
+        @include font-montserrat($size, 400);
+    }
+}
