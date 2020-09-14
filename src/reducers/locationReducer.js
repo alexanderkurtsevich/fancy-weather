@@ -6,6 +6,8 @@ const initialState = {
     lng: null,
     geometry: {},
     offset: null,
+    city: null,
+    country: null,
 }
 
 export default function locationRecuder(state = initialState, action) {
