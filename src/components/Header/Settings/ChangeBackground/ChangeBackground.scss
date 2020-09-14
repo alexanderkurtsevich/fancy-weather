@@ -1,18 +1,23 @@
-@import '../../../../style/constants.scss';
+@import "../../../../style/constants.scss";
 
 .change-background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background-image: url('../../../../assets//images/change-bg-bg.svg');
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
+  background-image: url("../../../../assets//images/change-bg-bg.svg");
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
 
-    &:hover .change-background__image {
-        transform: rotate(360deg);
-        transition: $slow-transition;
-    }
+  &__image_loading {
+    transform: rotate(360deg);
+    transition: $slow-transition;
+    animation: loading .7s ease-in-out 0s infinite;
+  }
+}
 
+@keyframes loading {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }

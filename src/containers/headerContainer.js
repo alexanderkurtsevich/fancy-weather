@@ -9,6 +9,7 @@ const mapStateToProps = state => {
         degrees: state.settings.degrees,
         isSelectOpened: state.settings.isSelectOpened,
         notification: state.settings.notification,
+        isBgLoading: state.settings.isBgLoading,
     }
 }
 

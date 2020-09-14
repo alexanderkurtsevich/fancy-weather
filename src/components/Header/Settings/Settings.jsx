@@ -10,6 +10,7 @@ const Settings = (props) => {
             <ChangeBackground
                 className='settings__change-background'
                 changeBackground={props.changeBackground}
+                isBgLoading={props.isBgLoading}
             />
             <LanguageSelect
                 className='settings__language-select'

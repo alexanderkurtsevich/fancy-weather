@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { setGeocodingInfo } from '../actions/locationActions';
 import { setWeatherInfo } from '../actions/weatherActions';
 import { ERRORS, WEATHER_DATA, GEOCODING_DATA } from '../constants/constants';
@@ -8,7 +8,8 @@ import {
     getDegrees,
     getLanguage,
     getSearchQuery,
-    getCache
+    getCache,
+    getOffset,
 } from './selectors';
 import {
     getUsersCoordinates,
@@ -26,6 +27,7 @@ import {
     cacheData,
     clearCache,
     setBackground,
+    startBgLoading,
 } from '../actions/settingsActions';
 
 function* geocodingWorker() {
@@ -116,15 +118,17 @@ function* getCachedData(language, degrees) {
     return null;
 }
 
-function* backgroundWorker(){
-    const backgroundImage = yield call(getBackgroundImage);
+function* backgroundWorker() {
+    yield put(startBgLoading())
+    const offset = select(getOffset)
+    const backgroundImage = yield call(() => getBackgroundImage(offset));
     yield put(setBackground(backgroundImage));
 }
 
 export default function* sagaWatcher() {
-    yield takeEvery(types.INITIAL_REQUEST, initialRequest)
-    yield takeEvery(types.SEARCH_REQUEST, searchRequest)
-    yield takeEvery(types.SELECT_DEGREES, changeDegreesRequest)
-    yield takeEvery(types.SELECT_LANGUAGE, dataRequest)
-    yield takeEvery(types.CHANGE_BACKGROUND, backgroundWorker)
+    yield takeLatest(types.INITIAL_REQUEST, initialRequest)
+    yield takeLatest(types.SEARCH_REQUEST, searchRequest)
+    yield takeLatest(types.SELECT_DEGREES, changeDegreesRequest)
+    yield takeLatest(types.SELECT_LANGUAGE, dataRequest)
+    yield takeLatest(types.CHANGE_BACKGROUND, backgroundWorker)
 }

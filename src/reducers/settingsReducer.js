@@ -10,7 +10,8 @@ const initialState = {
     notification: null,
     searchQuery: null,
     cache: {},
-    backgroundUrl: null
+    backgroundUrl: null,
+    isBgLoading: false,
 }
 
 export default function settingsReducer(state = initialState, action) {
@@ -93,6 +94,16 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
                 backgroundUrl: action.payload
+            }
+        case types.START_BG_LOADING:
+            return {
+                ...state,
+                isBgLoading: true,
+            }
+        case types.FINISH_BG_LOADING:
+            return {
+                ...state,
+                isBgLoading: false,
             }
         default: return state;
     }

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { LANGUAGES } from '../constants/constants';
 
 i18n.init({
-    lng: localStorage.language || LANGUAGES.RU,
+    lng: localStorage.language || LANGUAGES.EN,
     resources: {
         [LANGUAGES.EN]: {
             translation: {

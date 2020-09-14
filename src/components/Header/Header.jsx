@@ -17,6 +17,7 @@ const Header = (props) => {
                 selectLanguage={props.selectLanguage}
                 selectDegrees={props.selectDegrees}
                 changeBackground={props.changeBackground}
+                isBgLoading={props.isBgLoading}
             />
             {props.notification
                 ? <p className='header__notifications'>{t(props.notification)}</p>

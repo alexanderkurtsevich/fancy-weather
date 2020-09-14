@@ -100,3 +100,15 @@ export function clearCache() {
         type: types.CLEAR_CACHE
     }
 }
+
+export function startBgLoading() {
+    return {
+        type: types.START_BG_LOADING
+    }
+}
+
+export function finishBgLoading() {
+    return {
+        type: types.FINISH_BG_LOADING
+    }
+}
