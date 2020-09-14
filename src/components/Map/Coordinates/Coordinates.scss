@@ -1,9 +1,9 @@
-@import "../../../style/fonts.scss";
+@import '../../../style/fonts.scss';
 
 .coordinates {
     text-align: right;
 
-@include font-montserrat(20, 600);
+    @include font-montserrat(20, 600);
 }
 
 @media screen and (max-width: 1279px) {

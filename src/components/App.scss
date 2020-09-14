@@ -1,4 +1,4 @@
-@import "../style/constants.scss";
+@import '../style/constants.scss';
 
 .fancy-weather {
     display: grid;
@@ -7,7 +7,7 @@
     height: 100%;
     padding: 0 90px;
 
-    background-image: url("../assets/images/main-bg.jpg");
+    background-image: url('../assets/images/main-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

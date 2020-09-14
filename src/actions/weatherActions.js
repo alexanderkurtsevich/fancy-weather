@@ -9,20 +9,22 @@ export function setWeatherInfo(weatherInfo) {
             main: {
                 temp: Math.round(mainDay.temp),
                 description: mainDay.weather.description,
-                apparent: Math.round((mainDay.app_max_temp + mainDay.app_min_temp) / 2),
+                apparent: Math.round(
+                    (mainDay.app_max_temp + mainDay.app_min_temp) / 2
+                ),
                 wind: mainDay.wind_spd.toFixed(1),
                 humidity: mainDay.rh,
                 icon: mainDay.weather.icon,
-                time: mainDay.ts
+                time: mainDay.ts,
             },
             other: otherDays.map((day, index) => {
                 return {
                     temp: Math.round(day.temp),
                     icon: day.weather.icon,
                     id: index,
-                    date: day.datetime
-                }
-            })
-        }
-    }
+                    date: day.datetime,
+                };
+            }),
+        },
+    };
 }

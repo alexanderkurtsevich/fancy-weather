@@ -1,4 +1,4 @@
-@import "../../style/constants.scss";
+@import '../../style/constants.scss';
 
 .header {
     position: relative;
@@ -30,6 +30,7 @@
 
         &__notifications {
             position: relative;
+
             margin: 10px 0;
         }
     }

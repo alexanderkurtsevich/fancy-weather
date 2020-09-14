@@ -2,8 +2,8 @@ import * as types from '../constants/actionTypes';
 
 export function initialRequest() {
     return {
-        type: types.INITIAL_REQUEST
-    }
+        type: types.INITIAL_REQUEST,
+    };
 }
 
 export function setGeocodingInfo(geocodingInfo) {
@@ -22,13 +22,13 @@ export function setGeocodingInfo(geocodingInfo) {
             lng: formatCoordinates(coordinates.lng),
             geometry: geocodingInfo.geometry,
             offset: geocodingInfo.annotations.timezone.offset_sec,
-        }
-    }
+        },
+    };
 }
 
 function formatCoordinates(coordinates) {
     const regExp = /\d+°\s\d+'/;
     const minsAndDegs = coordinates.match(regExp)[0];
     const latitude = coordinates.slice(-1);
-    return `${minsAndDegs} ${latitude}`
+    return `${minsAndDegs} ${latitude}`;
 }
